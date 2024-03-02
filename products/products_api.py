@@ -2,7 +2,7 @@ from fastapi import APIRouter, UploadFile
 
 from database.productservice import add_new_products_db, get_all_products_db, get_exact_products_db, \
     edit_products_data_db, delete_product_db, comment_product_db, get_all_comment_db, checker_product_db, \
-    upload_product_photo
+    upload_product_photo, all_photos_db
 
 from products import AddProductValidator, EditProductValidator, CommentProductValidator
 
@@ -44,6 +44,13 @@ async def add_photo_product(product_id: int, photo_path: UploadFile = None):
         return {'message': result}
     else:
         return {'message': 'Возникла ошибка!'}
+
+
+@product_router.get('/all-photo_product')
+async def all_photos():
+    result = all_photos_db()
+
+    return result
 
 
 @product_router.get('/product/{product_id}')

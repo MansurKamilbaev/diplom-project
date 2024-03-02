@@ -31,6 +31,14 @@ def upload_product_photo(product_id, photo_path):
         return 'Нет продукта'
 
 
+def all_photos_db():
+    db = next(get_db())
+
+    photos = db.query(ProductPhoto).all()
+
+    return photos
+
+
 def get_all_products_db():
     db = next(get_db())
 

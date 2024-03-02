@@ -33,23 +33,21 @@ class ProductPhoto(Base):
     product_fk = relationship(Product, lazy='subquery')
 
 
-class UserCart(Base):
-    __tablename__ = 'user_carts'
-    cart_id = Column(Integer, primary_key=True, autoincrement=True)
-    user_id = Column(Integer, ForeignKey('users.user_id'))
-    product_id = Column(Integer, ForeignKey('products.product_id'))
-    quantity = Column(Integer)
-    size = Column(String)
-    color = Column(String)
-
-    user_fk = relationship(User, lazy='subquery')
-    product_fk = relationship(Product, lazy='subquery')
-
-
 class ProductComment(Base):
     __tablename__ = 'product_comment'
     comment_id = Column(Integer, primary_key=True, autoincrement=True)
     product_id = Column(Integer, ForeignKey('products.product_id'))
     assessment = Column(Integer)
     comment = Column(String)
+    product_fk = relationship(Product, lazy='subquery')
+
+
+class UserCart(Base):
+    __tablename__ = "user_cart"
+    cart_id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.user_id'))
+    product_id = Column(Integer, ForeignKey('products.product_id'))
+    quantity = Column(Integer)
+
+    user_fk = relationship(User, lazy='subquery')
     product_fk = relationship(Product, lazy='subquery')
